@@ -1,5 +1,5 @@
 # ModbusCService
-### ModbusCService allows to data exchange between device by Modbus protocol and Mqtt service.
+### ModbusCService allows to data exchange between device via Modbus protocol and Mqtt service.
 
 The idea is simple. Query data (individual registers) to modbus slave devices and publish it as a topic on the MQTT server. And vice versa, listen for established topics on the MQTT server and when a message arrives, send the data to the Modbus slave device.
 After receiving data from the modbus device, the program checks whether the data has changed. If they have changed, then he publishes them in MQTT.
