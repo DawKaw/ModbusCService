@@ -1,0 +1,22 @@
+#Copy this file to "/lib/systemd/system" and ...
+#  run command "systemctl enable modbusCService.service"
+#  next "systemctl start modbusCService.service"
+
+[Unit]
+Description=Modbus<->Mqtt exchange data serrvice
+After=network.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=forking
+Restart=on-failure
+RestartSec=5
+User=root
+KillSignal=SIGINT
+
+#ExecStart=/usr/local/bin/modbusCService -c /etc/modbusCService/modbuscs.conf -s modbuscs
+ExecStart=/usr/local/bin/modbusCService -c /etc/modbusCService/modbuscs.conf -v 5 -s modbuscs
+
+[Install]
+WantedBy=multi-user.target

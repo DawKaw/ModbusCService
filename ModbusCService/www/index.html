@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<head>
+    <title>ModbusCService</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <link rel="stylesheet" href="style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+    <script src="modbuscservice.js"></script>
+</head>
+<body>
+
+<script> 
+  //Internet Explorer bann
+  var isIE = /*@cc_on!@*/false || !!document.documentMode;
+  if (isIE) {
+    document.write("This side not working on The Internet Explorer!<br> Use other internety browser.");
+    document.execCommand("Stop");
+  };
+</script>
+
+
+<div class="overlay" id="overlay">
+  <div id="textOverlay"></div>
+</div> 
+  
+<div class="row">
+  <div class="table-container-inputs">
+    <div class="inputsTxt">I1 Message 1.<div class="led" id="ledA0" color="green"></div></div>
+    <div class="inputsTxt">I2 Message 2.<div class="led" id="ledA1" color="green"></div></div>
+    <div class="inputsTxt">I3 Message 3.<div class="led" id="ledA2" color="green"></div></div>
+    <div class="inputsTxt">I4 Message 4.<div class="led" id="ledA3" color="green"></div></div>
+    <div class="inputsTxt">I5 Message 5.<div class="led" id="ledA4" color="red"></div></div>
+    <div class="inputsTxt">I6 Message 6.<div class="led" id="ledA5" color="red"></div></div>
+    <div class="inputsTxt">I7 Message 7.<div class="led" id="ledA6" color="red"></div></div>
+    <div class="inputsTxt">I8 Message 8.<div class="led" id="ledA7" color="blue"></div></div>
+    <div class="inputsTxt">I9 Message 9.<div class="led" id="ledA8" color="red"></div></div>
+    <div class="inputsTxt">I10 Message 10.<div class="led" id="ledA9" color="green"></div></div>
+    <div class="inputsTxt">I11 Message 11.<div class="led" id="ledA10" color="yellow"></div></div>
+    <div class="inputsTxt">I12 Message 12.<div class="led" id="ledA11" color="yellow"></div></div>
+    <div class="inputsTxt">I13 Message 13.<div class="led" id="ledA12" color="yellow"></div></div>
+    <div class="inputsTxt">I14 Message 14.<div class="led" id="ledA13" color="yellow"></div></div>
+    <div class="inputsTxt">I15 Message 15.<div class="led" id="ledA14" color="yellow"></div></div>
+    <div class="inputsTxt">I16 Message 16.<div class="led" id="ledA15" color="yellow"></div></div>
+  </div>
+  
+  <div class="table-container-buttonsSeq">
+    
+    <div class="switch_parent">
+      <div class="switch_child">Q1 Output 1.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA0" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA0"></label>
+      </div>
+    </div>  
+
+    <div class="switch_parent">
+      <div class="switch_child">Q2 Output 2.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA1" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA1"></label>
+      </div>
+    </div>
+
+    <div class="switch_parent">
+      <div class="switch_child">Q3 Output 3.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA2" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA2"></label>
+      </div>  
+    </div>
+    
+ </div>
+  
+ <div class="table-container-buttonsRes"> 
+    
+    <div class="switch_parent">
+      <div class="switch_child">Q4 Output 4.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA3" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA3"></label>
+      </div>
+    </div>
+
+    <div class="switch_parent">
+      <div class="switch_child">Q5 Output 5.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA4" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA4"></label>
+      </div>
+    </div>
+    
+    <div class="switch_parent">
+      <div class="switch_child">Q6 Output 6.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA5" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA5"></label>
+      </div>
+    </div>      
+    
+    <div class="switch_parent">
+      <div class="switch_child">Q7 Output 7.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA6" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA6"></label>
+      </div>  
+    </div>
+
+    <div class="switch_parent">
+      <div class="switch_child">Q8 Output 8.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA7" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA7"></label>
+      </div>
+    </div>  
+    
+    <div class="switch_parent">
+      <div class="switch_child">Q9 Output 9.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA8" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA8"></label>
+      </div>
+    </div>
+    
+    <div class="switch_parent">
+      <div class="switch_child">Q10 Output 10.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA9" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA9"></label>
+      </div>
+    </div>
+
+    <div class="switch_parent">
+      <div class="switch_child">Q11 Output 11.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA10" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA10"></label>
+      </div>  
+    </div>
+      
+    <div class="switch_parent">
+      <div class="switch_child">Q12 Output 12.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA11" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA11"></label>
+      </div>
+    </div>    
+
+    <div class="switch_parent">
+      <div class="switch_child">Q13 Output 13.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA12" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA12"></label>
+      </div>
+    </div>
+    
+    <div class="switch_parent">
+      <div class="switch_child">Q14 Output 14.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA13" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA13"></label>
+      </div>
+    </div>
+    
+    <div class="switch_parent">
+      <div class="switch_child">Q15 Output 15.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA14" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA14"></label>
+      </div>  
+    </div>
+    
+    <div class="switch_parent">
+      <div class="switch_child">Q16 Output 16.</div>
+      <div class="switch__container">0&emsp;&emsp;1
+        <input id="switchA15" class="switch switch--shadow" type="checkbox" onclick="chkBoxClicked(this)">
+        <label for="switchA15"></label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
